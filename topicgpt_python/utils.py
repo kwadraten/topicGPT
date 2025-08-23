@@ -49,6 +49,16 @@ class APIClient:
         # Setting API key ----
         if api == "openai":
             self.client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+        elif api == "openrouter":
+            # using the same variable with openai
+            or_api_key = os.environ["OPENAI_API_KEY"]
+            # in case someone uses specific key name
+            if os.environ.get("OPENROUTER_API_KEY"):
+                or_api_key = os.environ["OPENROUTER_API_KEY"]
+            self.client = OpenAI(
+                base_url = "https://openrouter.ai/api/v1",
+                api_key = or_api_key
+            )
         elif api == "vertex":
             vertexai.init(
                 project=os.environ["VERTEX_PROJECT"],
@@ -155,7 +165,7 @@ class APIClient:
 
         for attempt in range(num_try):
             try:
-                if self.api in ["openai", "azure", "ollama"]:
+                if self.api in ["openai", "azure", "ollama", "openrouter"]:
                     completion = self.client.chat.completions.create(
                         model=self.model,
                         messages=message,
