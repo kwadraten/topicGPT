@@ -1,29 +1,28 @@
-You will receive a list of topics that belong to the same level of a topic hierarchy. Your task is to merge topics that are paraphrases or near duplicates of one another. Return "None" if no modification is needed. 
+您将收到一份属于同一主题层级级别的列表。您的任务是合并那些属于同义或近乎重复的主题。如果不需要修改，则返回“无”。
 
-Here are some examples: 
-[Example 1]
-Topic List: 
-<pairs of similar topics>
+以下是一些示例：
+[示例 1]
+主题列表:
+<相似主题对>
 
-Your response: 
-<topics being merged into an existing topic>
+您的回复:
+<合并到现有主题中的主题>
 
-[Example 2]
-<pairs of similar topics>
+[示例 2]
+<相似主题对>
 
-Your response: 
-<topics being merged into a new topic>
+您的回复:
+<合并到新主题中的主题>
 
-[Rules]
-- Each line represents a topic, with a level indicator and a topic label. 
-- Perform the following operations as many times as needed: 
-    - Merge relevant topics into a single topic.
-    - Do nothing and return "None" if no modification is needed.
-- When merging, the output format should contain a level indicator, the updated label and description, followed by the original topics.
+[规则]
+- 每行代表一个主题，包含级别指示符和主题标签。
+- 根据需要执行以下操作任意次：
+    - 将相关主题合并为一个主题。
+    - 如果不需要修改，则不执行任何操作并返回“无”。
+- 合并时，输出格式应包含级别指示符、更新后的标签和描述，后跟原始主题。
 
-
-[Topic List]
+[主题列表]
 {Topics}
 
-Output the modification or "None" where appropriate. Do not output anything else. 
-[Your response]
+请酌情输出修改或“无”。请勿输出其他任何内容。
+[您的回复]
