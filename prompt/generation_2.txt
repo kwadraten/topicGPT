@@ -1,43 +1,37 @@
-You will receive a branch from a topic hierarchy along with some documents assigned to the top-level topic of that branch. Your task is to identify generalizable second-level topics that can act as subtopics to the top-level topic in the provided branch. Add your topic(s) if they are missing from the provided branch. Otherwise, return the existing relevant or duplicate topics. 
+您将收到一个主题层级结构的一个分支，以及一些分配给该分支顶级主题的文档。您的任务是识别可作为该分支中顶级主题的子主题的、具有普遍性的二级主题。如果提供给您的分支中缺少任何相关主题，请添加它们。否则，请返回现有相关或重复的主题。
 
-[Example: Return "[2] Exports" (new) and "[2] Tariff" (existing) as the subtopics of "[1] Trade" (provided).]
-Topic branch:
-[1] Trade
-    [2] Tariff
-    [2] Foreign Investments
+[示例: 返回 “[2] 出口”（新）和 “[2] 关税”（现有）作为 “[1] 贸易”（已提供）的子主题。]
+主题分支:
+[1] 贸易
+    [2] 关税
+    [2] 外国投资
 
-Document 1: 
-Export Promotion Act of 2012 - Amends the Export Enhancement Act of 1988 to revise the duties of the Trade Promotion Coordinating Committee (TPCC). Requires the TPCC to: (1) make a recommendation for the annual unified federal trade promotion budget to the President; and (2) review the proposed fiscal year budget of each federal agency with responsibility for export promotion or export financing activities before it is submitted to the Office of Management and Budget (OMB) and the President, when (as required by current law) assessing the appropriate levels and allocation of resources among such agencies in support of such activities. 
+文档 1:
+《2012年出口促进法案》- 修订《1988年出口促进法案》，修改贸易促进协调委员会（TPCC）的职责。要求 TPCC：(1) 向总统提出年度统一的联邦贸易促进预算建议；以及 (2) 在各联邦机构负责出口促进或出口融资活动的拟议财政年度预算提交给管理和预算办公室（OMB）和总统之前，对其进行审查，以（根据现行法律要求）评估此类机构之间在支持此类活动方面的适当资源水平和分配。
 
-Document 2: 
-Amends the Harmonized Tariff Schedule of the United States to suspend temporarily the duty on mixtures containing Fluopyram.
+文档 2:
+修订《美国协调关税附表》，暂时中止含有氟吡菌酰胺的混合物的关税。
 
-Document 3: 
-Securing Exports Through Coordination and Technology Act - Amends the Foreign Relations Authorization Act, Fiscal Year 2003. Requires carriers obliged to file Shipper's Export Declarations to file them through AES (either directly or through intermediaries) before items are exported from any U.S. port, unless the Secretary of Commerce grants an exception. 
+文档 3:
+《通过协调和技术保障出口法案》- 修订《2003财年对外关系授权法案》。要求有义务提交托运人出口报关单的承运人，除非商务部长批准例外，否则在货物从任何美国港口出口之前，通过 AES（直接或通过中介）提交。
 
-Your response: 
-[1] Trade
-    [2] Exports (Document: 1, 3): Mentions export policies on goods.
-    [2] Tariff (Document: 2): Mentions tax policies on imports or exports of goods. 
+您的回复:
+[1] 贸易
+    [2] 出口 (文档: 1, 3): 提及商品出口政策。
+    [2] 关税 (文档: 2): 提及商品进出口税收政策。
 
-[Instructions]
-Step 1: Determine PRIMARY and GENERALIZABLE topics mentioned in the documents. 
-- The topics must be generalizable among the provided documents. 
-- Each topic must not be too specific so that it can accommodate future subtopics.
-- Each topic must reflect a SINGLE topic instead of a combination of topics.
-- Each top-level topic must have a level number and a short label. Second-level topics should also include the original documents associated with these topics (separated by commas) as well as a short description of the topic.
-- The number of topics proposed cannot exceed the number of documents provided.
-Step 2: Perform ONE of the following operations: 
-1. If the provided top-level topic is specific enough, DO NOT add any subtopics. Return the provided top-level topic.
-2. If your topic is duplicate or relevant to the provided topics, DO NOT add any subtopics. Return the existing relevant topic. 
-3. If your topic is relevant to and more specific than the provided top-level topic, add your topic as a second-level topic. DO NOT add to the first or third level of the hierarchy. 
+[说明]
+步骤 1: 确定文档中提及的主要且具有普遍性的主题。
+- 主题必须在所提供的文档中具有普遍性。
+- 每个主题不能过于具体，以便能够容纳未来的子主题。
+- 每个主题必须反映单个主题，而不是多个主题的组合。
+- 每个顶级主题必须具有级别编号和简短标签。二级主题还应包括与这些主题相关的原始文档（用逗号分隔）以及主题的简短描述。
+- 提议的主题数量不能超过所提供的文档数量。
+步骤 2: 执行以下操作之一:
+1. 如果所提供的顶级主题足够具体，则不要添加任何子主题。返回所提供的顶级主题。
+2. 如果您的主题是重复的或与所提供的主题相关，则不要添加任何子主题。返回现有相关主题。
+3. 如果您的主题与所提供的顶级主题相关且更具体，则将您的主题添加为二级主题。不要添加到层级结构的第一层或第三层。
 
-[Topic branch]
+[主题分支]
 {Topic}
-
-[Documents]
-{Document}
- 
-DO NOT add first- or third-level topics.
-
-Your response:
+您的回复:
