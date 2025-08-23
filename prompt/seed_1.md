@@ -1,1 +1,1 @@
-[1] Trade: Mentions the exchange of capital, goods, and services.
+[1] 贸易: 提及资本、商品和服务的交换。
