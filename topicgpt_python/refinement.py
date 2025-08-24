@@ -26,7 +26,7 @@ def topic_pairs(topic_sent, all_pairs, threshold=0.5, num_pair=2):
     - list: List of all pairs prompted so far.
     """
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = SentenceTransformer("all-MiniLM-L6-v2", device=device)
+    model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2", device=device)
     embeddings = model.encode(topic_sent, convert_to_tensor=True)
     cosine_scores = util.cos_sim(embeddings, embeddings).cpu()
 
