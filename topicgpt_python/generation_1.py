@@ -1,6 +1,6 @@
 import pandas as pd
 from topicgpt_python.utils import *
-from tqdm import tqdm
+from tqdm.auto import tqdm
 import regex
 import traceback
 from sentence_transformers import SentenceTransformer, util

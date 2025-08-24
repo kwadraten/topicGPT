@@ -1,6 +1,6 @@
 import pandas as pd
 import argparse
-from tqdm import tqdm
+from tqdm.auto import tqdm
 from topicgpt_python.utils import *
 
 

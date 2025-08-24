@@ -3,7 +3,7 @@ from topicgpt_python.utils import *
 
 import openai
 import numpy as np
-from tqdm import trange
+from tqdm.auto import trange
 import traceback
 import random
 from sentence_transformers import SentenceTransformer, util
