@@ -4,7 +4,6 @@ import os
 import regex
 import traceback
 import argparse
-# import json
 from topicgpt_python.utils import *
 from anytree import RenderTree
 from sentence_transformers import SentenceTransformer, util
@@ -124,6 +123,10 @@ def merge_topics(
                 if verbose:
                     print(f"Merging topics:\n{merge}")
                 
+                # 在输出中文或日文时，即使在提示词中强调使用半角标点
+                # 模型最后仍然会使用全角括号。
+                merge = merge.replace("（", "(").replace("）", ")")
+                
                 match = pattern_topic.match(merge.strip())
                 # 增加用来看正则表达式匹配结果的部分。
                 if verbose:
@@ -155,8 +158,8 @@ def merge_topics(
             temp_ls = topics_root.to_topic_list()
             print(f"Topics number in tree now: {len(temp_ls)}")
             # # 每完成一次合并都保存一下结果，以免中途出错丢失，便于恢复状态后重来。
-            # with open("data/merged.json", "wt", encoding="utf-8") as f:
-            #     json.dump(temp_ls, f, ensure_ascii=False)
+            # with open("data/merged.md", "wt", encoding="utf-8") as f:
+            #     f.write('\n'.join(temp_ls))
 
         except Exception as e:
             print("Error when calling API!")
