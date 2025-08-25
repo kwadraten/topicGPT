@@ -4,6 +4,7 @@ import os
 import regex
 import traceback
 import argparse
+# import json
 from topicgpt_python.utils import *
 from anytree import RenderTree
 from sentence_transformers import SentenceTransformer, util
@@ -90,25 +91,44 @@ def merge_topics(
 
     responses, orig_new = [], mapping
 
+    # 原正则表达式适用于英语 而不适用于日语
+    # pattern_topic = regex.compile(
+    #     r"^\[(\d+)\]([\w\s\-',]+)[^:]*:([\w\s,\.\-\/;']+) \(([^)]+)\)$"
+    # )
+    # pattern_original = regex.compile(r"\[(\d+)\]([\w\s\-',]+),?")
     pattern_topic = regex.compile(
-        r"^\[(\d+)\]([\w\s\-',]+)[^:]*:([\w\s,\.\-\/;']+) \(([^)]+)\)$"
+        r"^\[(\d+)\](.+):\s*(.+)\s*\((.+)\)"
     )
-    pattern_original = regex.compile(r"\[(\d+)\]([\w\s\-',]+),?")
+    pattern_original = regex.compile(r"\[(\d+)\]([^,]+),?")
 
     while len(new_pairs) > 1:
         refiner_prompt = refinement_prompt.format(Topics="\n".join(new_pairs))
-        if verbose:
-            print(f"Prompting model to merge topics:\n{refiner_prompt}")
+        # 看提示词用处不是很大。
+        # if verbose:
+        #     print(f"Prompting model to merge topics:\n{refiner_prompt}")
 
         try:
             response = api_client.iterative_prompt(
                 refiner_prompt, max_tokens, temperature, top_p
             )
             responses.append(response)
+
+            # 增加用来看模型回复的部分。
+            if verbose:
+                print(f"Model response:\n{response}")
+            
             merges = response.split("\n")
 
             for merge in merges:
+                # 增加用来看待匹配内容的部分。
+                if verbose:
+                    print(f"Merging topics:\n{merge}")
+                
                 match = pattern_topic.match(merge.strip())
+                # 增加用来看正则表达式匹配结果的部分。
+                if verbose:
+                    print(f"Matched Result: {match}")
+                
                 if match:
                     lvl, name, desc, originals = (
                         int(match.group(1)),
@@ -130,6 +150,14 @@ def merge_topics(
                     for orig in original_topics:
                         orig_new[orig[0]] = name
                     print(f"Updated topic tree with [{lvl}] {name}: {desc}")
+            
+            # 显示当前主题树当中的剩余主题数目，便于估算结束时间
+            temp_ls = topics_root.to_topic_list()
+            print(f"Topics number in tree now: {len(temp_ls)}")
+            # # 每完成一次合并都保存一下结果，以免中途出错丢失，便于恢复状态后重来。
+            # with open("data/merged.json", "wt", encoding="utf-8") as f:
+            #     json.dump(temp_ls, f, ensure_ascii=False)
+
         except Exception as e:
             print("Error when calling API!")
             traceback.print_exc()
