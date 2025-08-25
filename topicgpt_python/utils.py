@@ -610,6 +610,12 @@ class TopicTree:
             total_count += sum(node.count for node in duplicates)
             if duplicates and not parent_node:
                 parent_node = duplicates[0].parent
+        
+        # prevent merging if no nodes to merge
+        # otherwise, only new node will be added
+        # it causes infinite increase
+        if len(nodes_to_merge) == 0:
+            return self
 
         if parent_node is None:
             parent_node = self.root
