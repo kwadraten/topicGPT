@@ -11,7 +11,7 @@ import argparse
 import os
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-sbert = SentenceTransformer("all-MiniLM-L6-v2")
+sbert = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 
 
 def assignment(

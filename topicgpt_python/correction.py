@@ -10,7 +10,7 @@ from topicgpt_python.utils import *
 
 # Disable parallel tokenizers to avoid warnings
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-sbert = SentenceTransformer("all-MiniLM-L6-v2")
+sbert = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 
 
 def topic_parser(root_topics, df, verbose=False):
