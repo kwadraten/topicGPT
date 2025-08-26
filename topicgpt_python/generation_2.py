@@ -48,7 +48,7 @@ def parse_document_topics(df, topics_list):
 
     Returns: List of topics for each document
     """
-    pattern = regex.compile(r"^\[(\d+)\] ([\w\s]+):(.+)")
+    pattern = regex.compile(r"^\[(\d+)\] ([\w\u4e00-\u9fcb\u3040-\u30ff\s]+):(.+)")
     all_topics = []
 
     responses = (
@@ -190,7 +190,7 @@ def generate_topics(
     """
     res, docs = [], []
     main_pattern = regex.compile(
-        r"^\[(\d+)\] ([\w\s\-'\&,]+)(\(Document(?:s)?: ((?:(?:\d+)(?:(?:, )?)|-)+)\)([:\-\w\s,.\n'\&]*?))?$"
+        r"^\[(\d+)\] ([\w\u4e00-\u9fcb\u3040-\u30ff\s\-'\&,]+)(\(Document(?:s)?: ((?:(?:\d+)(?:(?:, )?)|-)+)\)([:\-\w\u4e00-\u9fcb\u3040-\u30ff\s,.\n'\&]*?))?$"
     )
 
     for parent_topic in tqdm(filter_topics_by_count(topics_root.root.descendants, df)):

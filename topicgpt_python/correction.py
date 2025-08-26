@@ -28,8 +28,8 @@ def topic_parser(root_topics, df, verbose=False):
     """
     error, hallucinated = [], []
     valid_topics = set(root_topics.get_root_descendants_name())
-    topic_pattern = re.compile(r"\[\d\] [\w\s\-'\&]+")
-    strip_pattern = re.compile(r"^[^a-zA-Z]+|[^a-zA-Z]+$")
+    topic_pattern = re.compile(r"\[\d\] [\w\u4e00-\u9fcb\u3040-\u30ff\s\-'\&]+")
+    strip_pattern = re.compile(r"^[^a-zA-Z\u4e00-\u9fcb\u3040-\u30ff]+|[^a-zA-Z\u4e00-\u9fcb\u3040-\u30ff]+$")
 
     for i, response in enumerate(df.responses.tolist()):
         extracted_topics = [
